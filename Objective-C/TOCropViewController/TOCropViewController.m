@@ -28,7 +28,7 @@
 #import "TOCroppedImageAttributes.h"
 
 static const CGFloat kTOCropViewControllerTitleTopPadding = 14.0f;
-static const CGFloat kTOCropViewControllerToolbarHeight = 88.0f;
+static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 
 @interface TOCropViewController () <UIActionSheetDelegate, UIViewControllerTransitioningDelegate, TOCropViewDelegate>
 
@@ -284,7 +284,12 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 88.0f;
         if (self.toolbarPosition == TOCropViewControllerToolbarPositionBottom) {
             frame.origin.y = CGRectGetHeight(self.view.bounds) - (frame.size.height + insets.bottom);
         } else {
-            frame.origin.y = insets.top;
+               if (@available(iOS 11.0, *)) {
+        frame.origin.y = self.view.safeAreaInsets.top + kTOCropViewControllerTitleTopPadding;
+    }
+    else {
+        frame.origin.y = self.statusBarHeight + kTOCropViewControllerTitleTopPadding;
+    }
         }
     }
     
@@ -323,7 +328,13 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 88.0f;
         if (self.toolbarPosition == TOCropViewControllerToolbarPositionBottom) {
             frame.size.height -= (insets.bottom + kTOCropViewControllerToolbarHeight);
         } else if (self.toolbarPosition == TOCropViewControllerToolbarPositionTop) {
-			frame.origin.y = kTOCropViewControllerToolbarHeight + insets.top;
+              if (@available(iOS 11.0, *)) {
+        frame.origin.y = self.view.safeAreaInsets.top + kTOCropViewControllerToolbarHeight;
+    }
+    else {
+        frame.origin.y = self.statusBarHeight + kTOCropViewControllerToolbarHeight;
+    }
+		
             frame.size.height -= frame.origin.y;
         }
     }
