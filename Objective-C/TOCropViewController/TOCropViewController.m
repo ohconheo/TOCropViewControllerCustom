@@ -285,10 +285,10 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
             frame.origin.y = CGRectGetHeight(self.view.bounds) - (frame.size.height + insets.bottom);
         } else {
                if (@available(iOS 11.0, *)) {
-        frame.origin.y = self.view.safeAreaInsets.top + kTOCropViewControllerTitleTopPadding;
+        frame.origin.y = self.view.safeAreaInsets.top + kTOCropViewControllerTitleTopPadding-10.0f;
     }
     else {
-        frame.origin.y = self.statusBarHeight + kTOCropViewControllerTitleTopPadding;
+        frame.origin.y = self.statusBarHeight + kTOCropViewControllerTitleTopPadding -10.0f;
     }
         }
     }
@@ -329,10 +329,10 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
             frame.size.height -= (insets.bottom + kTOCropViewControllerToolbarHeight);
         } else if (self.toolbarPosition == TOCropViewControllerToolbarPositionTop) {
               if (@available(iOS 11.0, *)) {
-        frame.origin.y = self.view.safeAreaInsets.top + kTOCropViewControllerToolbarHeight;
+        frame.origin.y = self.view.safeAreaInsets.top + kTOCropViewControllerToolbarHeight -10.0f;
     }
     else {
-        frame.origin.y = self.statusBarHeight + kTOCropViewControllerToolbarHeight;
+        frame.origin.y = self.statusBarHeight + kTOCropViewControllerToolbarHeight -10.0f;
     }
 		
             frame.size.height -= frame.origin.y;
